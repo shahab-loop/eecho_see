@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
- import 'package:get/get.dart';
-import 'screens/home_screen.dart';
+import 'package:get/get.dart';
+
+import 'app/routes/app_pages.dart';
+import 'app/routes/app_routes.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const EchoSeeApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class EchoSeeApp extends StatelessWidget {
+  const EchoSeeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Echo See',
+      title: 'EchoSee',
       debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.home,
+      getPages: AppPages.pages,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2563EB)),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
     );
   }
 }

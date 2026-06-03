@@ -3,7 +3,7 @@ import '../services/speech_service.dart';
 
 class SpeechController extends GetxController {
   final SpeechService _speechService = SpeechService();
-  
+
   var recognizedText = 'Press the button and start speaking'.obs;
   var isListening = false.obs;
 

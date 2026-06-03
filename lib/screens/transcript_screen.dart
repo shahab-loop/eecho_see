@@ -6,12 +6,8 @@ class TranscriptScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Transcript'),
-      ),
-      body: const Center(
-        child: Text('Transcript Screen'),
-      ),
+      appBar: AppBar(title: const Text('Transcript')),
+      body: const Center(child: Text('Transcript Screen')),
     );
   }
 }
