@@ -1,6 +1,6 @@
+import 'package:eecho_see/controllers/speech_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/speech_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,10 +10,10 @@ class HomeScreen extends StatelessWidget {
     final SpeechController controller = Get.put(SpeechController());
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Echo See'), centerTitle: true),
+      appBar: AppBar(title: Text('Echo See'), centerTitle: true),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding:  EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -22,33 +22,67 @@ class HomeScreen extends StatelessWidget {
                   controller.isListening.value
                       ? 'Listening...'
                       : 'Tap the mic to start',
-                  style: const TextStyle(fontSize: 18, color: Colors.grey),
+                  style: TextStyle(fontSize: 18, color: Colors.grey),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.deepPurple.withValues(alpha: 0.3),
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Obx(
-                      () => Text(
-                        controller.recognizedText.value,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Obx(
+                            () => Text(
+                          controller.recognizedText.value,
+                          textAlign: TextAlign.center,
+                          style:  TextStyle(fontSize: 20),
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
+                    Positioned(
+                      left: 10,
+                      right: 10,
+                      bottom: 20,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            'English Subtitles',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.deepPurple,
+                            ),
+                          ),
+
+                          const SizedBox(height: 8),
+
+                          Obx(
+                                () => Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                controller.translatedText.value.isEmpty
+                                    ? '...'
+                                    : controller.translatedText.value,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.yellow,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              )
             ],
           ),
         ),

@@ -11,13 +11,15 @@ class TranslationService {
     return translation.text;
   }
 
-  Future<void> startListening(Function(String) onResult) async {
+  Future<void> startListening(
+      Function(String, bool) onResult,
+      ) async {
     bool available = await _speechService.initialize();
+
     if (available) {
       _speechService.startListening(onResult);
     }
   }
-
   void stopListening() {
     _speechService.stopListening();
   }
